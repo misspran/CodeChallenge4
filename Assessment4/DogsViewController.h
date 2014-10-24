@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Person.h"
+#import <CoreData/CoreData.h>
 
 @interface DogsViewController : UIViewController
+@property (weak, nonatomic) Person *detailPerson;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

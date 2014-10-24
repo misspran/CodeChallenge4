@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *dogs;
+@property NSArray *personList;
 @end
 
 @interface Person (CoreDataGeneratedAccessors)
@@ -23,5 +24,6 @@
 - (void)removeDogsObject:(Dog *)value;
 - (void)addDogs:(NSSet *)values;
 - (void)removeDogs:(NSSet *)values;
+
 
 @end

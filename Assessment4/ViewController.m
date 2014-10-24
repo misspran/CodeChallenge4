@@ -7,6 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "Dog.h"
+#import "Person.h"
+#import <CoreData/CoreData.h>
+#import "DogsViewController.h"
+#import "AddDogViewController.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 
@@ -14,6 +19,8 @@
 
 @property UIAlertView *addAlert;
 @property UIAlertView *colorAlert;
+@property NSArray *dogOwnersArray;
+@property NSArray *personList;
 
 @end
 
@@ -23,68 +30,84 @@
 {
     [super viewDidLoad];
     self.title = @"Dog Owners";
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Person"];
+
+    [self loadData];
+    NSArray *dogOwnersArray = [self.managedObjectContext executeFetchRequest:request error:nil];
 }
 
 #pragma mark - UITableView Delegate Methods
+- (void)loadData{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://s3.amazonaws.com/mobile-makers-assets/app/public/ckeditor_assets/attachments/25/owners.json"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+     {
+         NSArray *ownersArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
+         for (NSString *name in ownersArray) {
+             Person *person = [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:self.managedObjectContext];
+             person.name = name;
+
+         }
+         [self.managedObjectContext save:nil];
+
+     }];
+    [self fetchData];
+
+}
+-(void)fetchData{
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Person"];
+     self.personList = [self.managedObjectContext executeFetchRequest:request error:nil];
+    NSLog(@"%@",@(self.personList.count));
+}
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //TODO: UPDATE THIS ACCORDINGLY
-    return 1;
+    return self.personList.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"myCell"];
     //TODO: UPDATE THIS ACCORDINGLY
+    Person *ppl = [self.personList objectAtIndex:indexPath.row];
+    cell.textLabel.text = ppl.name;
     return cell;
+
+ //   NSManagedObject *character = [Person.perror objectAtIndex:indexPath.row];
+
 }
-
-#pragma mark - UIAlertView Methods
-
-//METHOD FOR PRESENTING ALERT VIEW WITH TEXT FIELD FOR USER TO ENTER NEW PERSON
-- (IBAction)onAddButtonTapped:(UIBarButtonItem *)sender
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    self.addAlert = [[UIAlertView alloc] initWithTitle:@"Add a Person"
-                                                    message:nil
-                                                   delegate:self
-                                          cancelButtonTitle:@"Cancel"
-                                          otherButtonTitles:@"Add", nil];
-    self.addAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    UITextField *alertTextField = [self.addAlert textFieldAtIndex:0];
-    alertTextField.keyboardType = UIKeyboardTypeDefault;
+    Person *ownername = [self.personList objectAtIndex:self.myTableView.indexPathForSelectedRow.row];
+    DogsViewController *viewController = segue.destinationViewController;
+    viewController.detailPerson = ownername;
 
-    self.addAlert.tag = 0;
-    [self.addAlert show];
 }
+#pragma mark - UIAlertView Methods
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex != alertView.cancelButtonIndex && alertView.tag == 0)
+    //TODO: SAVE USER'S DEFAULT COLOR PREFERENCE USING THE CONDITIONAL BELOW
+
+    if (buttonIndex == 0)
     {
-        //TODO: ADD YOUR CODE HERE FOR WHEN USER ADDS NEW PERSON
+        self.navigationController.navigationBar.tintColor = [UIColor purpleColor];
+    }
+    else if (buttonIndex == 1)
+    {
+        self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+    }
+    else if (buttonIndex == 2)
+    {
+        self.navigationController.navigationBar.tintColor = [UIColor orangeColor];
+    }
+    else if (buttonIndex == 3)
+    {
+        self.navigationController.navigationBar.tintColor = [UIColor greenColor];
     }
 
-    //TODO: SAVE USER'S DEFAULT COLOR PREFERENCE USING THE CONDITIONAL BELOW
-    else if (alertView.tag == 1)
-    {
-        if (buttonIndex == 0)
-        {
-            self.navigationController.navigationBar.tintColor = [UIColor purpleColor];
-        }
-        else if (buttonIndex == 1)
-        {
-            self.navigationController.navigationBar.tintColor = [UIColor blueColor];
-        }
-        else if (buttonIndex == 2)
-        {
-            self.navigationController.navigationBar.tintColor = [UIColor orangeColor];
-        }
-        else if (buttonIndex == 3)
-        {
-            self.navigationController.navigationBar.tintColor = [UIColor greenColor];
-        }
-    }
 }
 
 //METHOD FOR PRESENTING USER'S COLOR PREFERENCE

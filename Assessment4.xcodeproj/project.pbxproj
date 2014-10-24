@@ -24,6 +24,9 @@
 		93CD77E7199962E900D27E0A /* DogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CD77E6199962E900D27E0A /* DogsViewController.m */; };
 		93CD77EA1999642A00D27E0A /* AddDogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CD77E91999642A00D27E0A /* AddDogViewController.m */; };
 		93CD77ED199964A100D27E0A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93CD77EB199964A100D27E0A /* Model.xcdatamodeld */; };
+		CE99848D19FA9B590032741A /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = CE99848C19FA9B590032741A /* Person.m */; };
+		CE99849219FAA5470032741A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE99849119FAA5470032741A /* CoreData.framework */; };
+		CE99849519FAB3A90032741A /* Dog.m in Sources */ = {isa = PBXBuildFile; fileRef = CE99849419FAB3A90032741A /* Dog.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,11 @@
 		93CD77E81999642A00D27E0A /* AddDogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDogViewController.h; sourceTree = "<group>"; };
 		93CD77E91999642A00D27E0A /* AddDogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDogViewController.m; sourceTree = "<group>"; };
 		93CD77EC199964A100D27E0A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		CE99848B19FA9B590032741A /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Person.h; path = ../Person.h; sourceTree = "<group>"; };
+		CE99848C19FA9B590032741A /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Person.m; path = ../Person.m; sourceTree = "<group>"; };
+		CE99849119FAA5470032741A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		CE99849319FAB3A90032741A /* Dog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dog.h; sourceTree = "<group>"; };
+		CE99849419FAB3A90032741A /* Dog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dog.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE99849219FAA5470032741A /* CoreData.framework in Frameworks */,
 				93CD77B31999604D00D27E0A /* CoreGraphics.framework in Frameworks */,
 				93CD77B51999604D00D27E0A /* UIKit.framework in Frameworks */,
 				93CD77B11999604D00D27E0A /* Foundation.framework in Frameworks */,
@@ -109,6 +118,7 @@
 		93CD77AF1999604D00D27E0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE99849119FAA5470032741A /* CoreData.framework */,
 				93CD77B01999604D00D27E0A /* Foundation.framework */,
 				93CD77B21999604D00D27E0A /* CoreGraphics.framework */,
 				93CD77B41999604D00D27E0A /* UIKit.framework */,
@@ -131,6 +141,10 @@
 				93CD77E91999642A00D27E0A /* AddDogViewController.m */,
 				93CD77C81999604D00D27E0A /* Images.xcassets */,
 				93CD77EB199964A100D27E0A /* Model.xcdatamodeld */,
+				CE99849319FAB3A90032741A /* Dog.h */,
+				CE99849419FAB3A90032741A /* Dog.m */,
+				CE99848B19FA9B590032741A /* Person.h */,
+				CE99848C19FA9B590032741A /* Person.m */,
 				93CD77B71999604D00D27E0A /* Supporting Files */,
 			);
 			path = Assessment4;
@@ -262,8 +276,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE99849519FAB3A90032741A /* Dog.m in Sources */,
 				93CD77C71999604D00D27E0A /* ViewController.m in Sources */,
 				93CD77C11999604D00D27E0A /* AppDelegate.m in Sources */,
+				CE99848D19FA9B590032741A /* Person.m in Sources */,
 				93CD77BD1999604D00D27E0A /* main.m in Sources */,
 				93CD77EA1999642A00D27E0A /* AddDogViewController.m in Sources */,
 				93CD77E7199962E900D27E0A /* DogsViewController.m in Sources */,
@@ -472,6 +488,7 @@
 				93CD77E11999604D00D27E0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		93CD77E21999604D00D27E0A /* Build configuration list for PBXNativeTarget "Assessment4Tests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +497,7 @@
 				93CD77E41999604D00D27E0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

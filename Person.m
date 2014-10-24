@@ -12,6 +12,9 @@
 
 @implementation Person
 
+
+
+
 @dynamic name;
 @dynamic dogs;
 

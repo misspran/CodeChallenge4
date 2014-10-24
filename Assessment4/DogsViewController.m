@@ -7,10 +7,16 @@
 //
 
 #import "DogsViewController.h"
+#import "ViewController.h"
+#import "Person.h"
+#import "Dog.h"
+#import <CoreData/CoreData.h>
 
 @interface DogsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *dogsTableView;
+@property NSArray *ownedDogs;
+
 
 @end
 
@@ -19,21 +25,43 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"My Dogs";
+    self.title = @"Dogs";
+    
 }
 
 #pragma mark - UITableView Delegate Methods
+-(void)loadDogs{
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Dog"];
+  //  self.ownedDogs = [[self managedObjectContext] executeFetchRequest:request];
+
+}
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    //TODO: UPDATE THIS ACCORDINGLY
     return 1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dogCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"dogCell"];
+    //TODO: UPDATE THIS ACCORDINGLY
 
     return cell;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString: @"AddDogSegue"])
+    {
+        
+
+    }
+    else
+    {
+
+    }
 }
 
 @end
